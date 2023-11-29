@@ -1,0 +1,7 @@
+Firstly create the table in mariadb as same as the hive table and then 
+execute Below sqoop command linux 
+
+sqoop export --connect jdbc:mysql://10.54.210.59:3306/ods --username dbadmin --password Icdb@2023 --table dcrm_itg_csmr_n_gldn_rcrd --export-dir /user/hive/warehouse/dcxt_workspace.db/temp_dcrm_itg_csmr_n_gldn_rcrd/delta_0000001_0000001_0000 --input-fields-terminated-by '\001' --m 1
+
+
+the file you will get from hive files folders    delta_0000001_0000001_0000
