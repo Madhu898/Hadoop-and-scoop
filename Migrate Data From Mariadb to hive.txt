@@ -1,0 +1,13 @@
+######### When You have to select data from mariadb with some condition and required columns ########
+
+
+sqoop import --connect jdbc:mysql://10.54.210.59:3306/dw --username dbadmin -P --query "SELECT EML_ADR ,TYMD ,SEX_CD ,OCCP_CD ,DSG_TCD ,MPOL_CD ,LCST_CD ,ZIP ,ADR_1,CSMR_TYPE_CD ,ITG_CSMR_NO ,CSMR_SCN_CD FROM csmr_org_b WHERE CSMR_SCN_CD = 'CN' AND \$CONDITIONS" --target-dir /user/jyothi/dw/csmr_org_b_230912 --fields-terminated-by '\001' --escaped-by '\\' --hive-drop-import-delims -m 1
+
+######## when you have to entire table from mariadb
+
+sqoop import --connect jdbc:mysql://10.54.210.59:3306/dw --username dbadmin -P --table valid_email_ids_from_hive_230728 --target-dir /user/jyothi/dw/valid_email_ids_from_hive_23_11_29 --fields-terminated-by '\001' --escaped-by '\\' --hive-drop-import-delims -m 1
+
+
+-- After executing this in linux server then go to hive folder (/user/jyothi/dw/valid_email_ids_from_hive_23_11_29)
+and then you will get one file like part-m-00000 then create table using this file from hive Plus symbol
+
