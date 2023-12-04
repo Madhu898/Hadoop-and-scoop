@@ -1,0 +1,33 @@
+######### When You have to select data from mariadb with some condition and required columns ########
+
+
+sqoop import --connect jdbc:mysql://10.54.210.59:3306/dw --username dbadmin -P --query "SELECT ITG_CSMR_NO,CSMR_NM,CSMR_SCN_CD FROM csmr_org_b WHERE CSMR_SCN_CD = 'CN' AND \$CONDITIONS" --target-dir /user/jyothi/dw/csmr_org_b_230912 --fields-terminated-by '\001' --escaped-by '\\' --hive-drop-import-delims -m 1
+
+######## when you have to entire table from mariadb
+
+sqoop import --connect jdbc:mysql://10.54.210.59:3306/dw --username dbadmin -P --table valid_email_ids_from_hive_230728 --target-dir /user/jyothi/dw/valid_email_ids_from_hive_23_11_29 --fields-terminated-by '\001' --escaped-by '\\' --hive-drop-import-delims -m 1
+
+
+-- After executing this in linux server then go to hive folder (/user/jyothi/dw/valid_email_ids_from_hive_23_11_29)
+and then you will get one file like part-m-00000 then create table using this file from hive Plus symbol
+
+
+
+
+############### ICDB Production Credentials 
+username = dbadmin
+password = IcdbProd@2023
+
+---------------------------
+Query to import data from production database to hive 
+----------------------------------------
+ ######################  TO GET ENTIRE TABLE FROM PRODUCTION SERVER OF ICDB ###############################################
+sqoop import --connect jdbc:mysql://10.54.209.121:3306/mig1 --username dbadmin -P --table csmr_org_b_1 --target-dir /user/jyothi/dw/csmr_org_b_1_new --fields-terminated-by '\001' --escaped-by '\\' --hive-drop-import-delims -m 1
+
+----------------------------------------------
+
+
+--------------------------------
+######################  TO GET SELECTED COLUMNS  FROM TABLE AT PRODUCTION SERVER OF ICDB ##################################
+---------------------------------
+sqoop import --connect jdbc:mysql://10.54.209.121:3306/dw --username dbadmin -P --query "SELECT ITG_CSMR_NO,CSMR_NM,CSMR_SCN_CD FROM csmr_org_b WHERE CSMR_SCN_CD = 'CN' AND \$CONDITIONS" --target-dir /user/jyothi/dw/csmr_org_b_231204 --fields-terminated-by '\001' --escaped-by '\\' --hive-drop-import-delims -m 1
